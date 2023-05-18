@@ -1,0 +1,24 @@
+/* header.css */
+
+/* Override the hover style for Ant Design's Button component */
+.ant-btn-default:hover {
+  background-color: #d3d3d3 !important;
+  border: none !important;
+  color: #000000 !important;
+}
+
+/* Apply the custom style to the sign-up button */
+.header-signup-button:hover {
+  background-color: #ff0000 !important;
+  border: none !important;
+  color: #ffffff !important;
+}
+
+/* Apply the custom style to the sign-up modal's confirm button */
+.header-signup-modal .ant-modal-footer .ant-btn-primary {
+  background-color: #ff0000 !important;
+}
+
+.disable-hover .ant-btn[disabled]:hover {
+  pointer-events: none;
+}
