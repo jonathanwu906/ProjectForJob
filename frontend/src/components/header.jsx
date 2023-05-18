@@ -59,12 +59,11 @@ function Header() {
     setTimeout(() => {
       if (!email || !password) {
         setEmptyFieldError(true);
-        setConfirmLoading(false);
       } else {
         setSignInOpen(false);
-        setConfirmLoading(false);
         handleSignInSubmit(); // Call the submit function here
       }
+      setConfirmLoading(false);
     }, 5000);
   };
 
@@ -73,12 +72,13 @@ function Header() {
     setTimeout(() => {
       if (!name || !email || !password || !confirmPassword) {
         setEmptyFieldError(true);
-        setConfirmLoading(false);
+      } else if (password !== confirmPassword) {
+        setPasswordMatchError(true);
       } else {
         setSignUpOpen(false);
-        setConfirmLoading(false);
         handleSignUpSubmit(); // Call the submit function here
       }
+      setConfirmLoading(false);
     }, 5000);
   };
 
@@ -93,19 +93,14 @@ function Header() {
     setEmptyFieldError(false); // Clear the empty field error
   };
 
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-    setEmptyFieldError(false); // Clear the empty field error
-  };
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+  const handleInputChange = (e, setState) => {
+    setState(e.target.value);
     setEmptyFieldError(false); // Clear the empty field error
   };
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
-    setPasswordMatchError(false); // Reset password match error on password change
+    setPasswordMatchError(e.target.value !== confirmPassword); // Check if passwords match
     setEmptyFieldError(false); // Clear the empty field error
   };
 
@@ -202,7 +197,7 @@ function Header() {
       </div>
       <Modal
         title="Sign In"
-        open={signInOpen}
+        visible={signInOpen}
         onOk={handleSignInOk}
         confirmLoading={confirmLoading}
         onCancel={handleCancel}
@@ -219,7 +214,7 @@ function Header() {
           <Input
             placeholder="Email"
             value={email}
-            onChange={handleEmailChange}
+            onChange={(e) => handleInputChange(e, setEmail)}
             className="mb-4"
           />
         </div>
@@ -256,7 +251,7 @@ function Header() {
       </Modal>
       <Modal
         title="Please sign up:"
-        open={signUpOpen}
+        visible={signUpOpen}
         onOk={handleSignUpOk}
         confirmLoading={confirmLoading}
         onCancel={handleCancel}
@@ -275,7 +270,7 @@ function Header() {
           <Input
             placeholder="Name"
             value={name}
-            onChange={handleNameChange}
+            onChange={(e) => handleInputChange(e, setName)}
             className="mb-4"
           />
         </div>
@@ -283,7 +278,7 @@ function Header() {
           <Input
             placeholder="Email"
             value={email}
-            onChange={handleEmailChange}
+            onChange={(e) => handleInputChange(e, setEmail)}
             className="mb-4"
           />
         </div>
