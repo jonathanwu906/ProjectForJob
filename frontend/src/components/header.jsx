@@ -1,171 +1,57 @@
+import { useState } from "react";
 import { Button, Input, Modal } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
-import { useState, useEffect, useRef } from "react";
+import { SearchOutlined, GithubOutlined } from "@ant-design/icons";
+import Logo from "../assets/logo.png";
 import "../styles/header.css";
 
 function Header() {
-  const [signInOpen, setSignInOpen] = useState(false);
-  const [signUpOpen, setSignUpOpen] = useState(false);
-  const [confirmLoading, setConfirmLoading] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [emptyFieldError, setEmptyFieldError] = useState(false);
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [passwordMatchError, setPasswordMatchError] = useState(false);
-  const signInModalRef = useRef(null); // Reference to the sign-in modal
-  const signUpModalRef = useRef(null); // Reference to the sign-up modal
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
-  useEffect(() => {
-    // Add event listener when the component mounts
-    window.addEventListener("click", handleWindowClick);
+  const CustomModalTitle = () => (
+    <div className="text-center">
+      <h3 className="text-xl">Sign Up on ProjectForJob</h3>
+    </div>
+  );
 
-    // Cleanup the event listener when the component unmounts
-    return () => {
-      window.removeEventListener("click", handleWindowClick);
-    };
-  });
-
-  const handleWindowClick = (event) => {
-    if (
-      signUpModalRef.current &&
-      !signUpModalRef.current.contains(event.target) &&
-      !confirmLoading
-    ) {
-      handleCancel();
-    }
-
-    if (
-      signInModalRef.current &&
-      !signInModalRef.current.contains(event.target) &&
-      !confirmLoading
-    ) {
-      handleCancel();
-    }
+  const handleGithubSignIn = async () => {
+    window.location.href =
+      "https://github.com/login/oauth/authorize?client_id=67b1c88e47149ca869f3&redirect_uri=http://localhost:3000/api/redirect";
   };
 
-  const onSearch = (value) => console.log(value);
-
-  const showSignInModal = () => {
-    setSignInOpen(true);
-  };
-
-  const showSignUpModal = () => {
-    setSignUpOpen(true);
-  };
-
-  const handleSignInOk = () => {
-    setConfirmLoading(true);
-    setTimeout(() => {
-      if (!email || !password) {
-        setEmptyFieldError(true);
-      } else {
-        setSignInOpen(false);
-        handleSignInSubmit(); // Call the submit function here
-      }
-      setConfirmLoading(false);
-    }, 5000);
-  };
-
-  const handleSignUpOk = () => {
-    setConfirmLoading(true);
-    setTimeout(() => {
-      if (!name || !email || !password || !confirmPassword) {
-        setEmptyFieldError(true);
-      } else if (password !== confirmPassword) {
-        setPasswordMatchError(true);
-      } else {
-        setSignUpOpen(false);
-        handleSignUpSubmit(); // Call the submit function here
-      }
-      setConfirmLoading(false);
-    }, 5000);
+  const showModal = () => {
+    setIsModalVisible(true);
   };
 
   const handleCancel = () => {
-    setSignInOpen(false);
-    setSignUpOpen(false);
-    setPasswordMatchError(false);
-    setName("");
-    setEmail("");
-    setPassword("");
-    setConfirmPassword("");
-    setEmptyFieldError(false); // Clear the empty field error
-  };
-
-  const handleInputChange = (e, setState) => {
-    setState(e.target.value);
-    setEmptyFieldError(false); // Clear the empty field error
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-    setPasswordMatchError(e.target.value !== confirmPassword); // Check if passwords match
-    setEmptyFieldError(false); // Clear the empty field error
-  };
-
-  const handleConfirmPasswordChange = (e) => {
-    setConfirmPassword(e.target.value);
-    setPasswordMatchError(e.target.value !== password); // Check if passwords match
-    setEmptyFieldError(false); // Clear the empty field error
-  };
-
-  const handleSignInSubmit = () => {
-    // Validate if any field is empty
-    if (!email || !password) {
-      setEmptyFieldError(true);
-      return; // Exit the function if there's an empty field
-    }
-
-    // Handle sign-in form submission here
-    console.log("Email:", email);
-    console.log("Password:", password);
-
-    // For now, let's log a success message
-    console.log("Form submitted successfully!");
-  };
-
-  const handleSignUpSubmit = () => {
-    // Validate if any field is empty
-    if (!name || !email || !password || !confirmPassword) {
-      setEmptyFieldError(true);
-      return; // Exit the function if there's an empty field
-    }
-
-    // Handle sign-up form submission here
-    console.log("Name:", name);
-    console.log("Email:", email);
-    console.log("Password:", password);
-    console.log("Confirm Password:", confirmPassword);
-
-    if (password !== confirmPassword) {
-      setPasswordMatchError(true);
-    } else {
-      // Password and confirm password match
-      // Submit the form or perform further actions
-      // For now, let's log a success message
-      console.log("Form submitted successfully!");
-    }
+    setIsModalVisible(false);
   };
 
   return (
     <>
-      <div className="flex justify-between py-5 px-8">
+      <div className="fixed-header flex justify-between py-2.5 px-8 bg-white">
         <div className="font-sans items-center inline-flex flex-grow">
+          <a href="http://localhost:4173">
+            <img src={Logo} alt="ProjectForJob" />
+          </a>
           <Input
-            className="border border-gray-300 h-10 w-56 rounded-md text-gray-600"
+            className="ml-8 border border-gray-300 h-10 w-56 rounded-md text-gray-600"
             placeholder="Search for projects or jobs"
             prefix={<SearchOutlined />}
-            onSearch={onSearch}
           />
           <div className="ml-8 items-center flex text-gray-600 text-base box-border">
             <div>
-              <a className="font-normal cursor-pointer hover:text-red-500">
+              <a
+                href="http://localhost:4173"
+                className="font-normal cursor-pointer hover:text-red-500"
+              >
                 Projects
               </a>
             </div>
             <div>
-              <a className="font-normal ml-8 cursor-pointer hover:text-red-500">
+              <a
+                href="http://localhost:4173/jobs"
+                className="font-normal ml-8 cursor-pointer hover:text-red-500"
+              >
                 Jobs
               </a>
             </div>
@@ -176,160 +62,45 @@ function Header() {
             </div>
           </div>
         </div>
+
         <div className="items-center flex box-border font-sans">
           <div>
             <div
               className="font-normal text-base line-height-24 text-gray-600 block ml-8 cursor-pointer hover:text-red-500"
-              onClick={showSignInModal}
+              onClick={showModal}
             >
               Sign in
             </div>
           </div>
           <div>
             <Button
-              className="header-signup-button bg-red-600 rounded-md text-white text-sm font-semibold px-4 relative cursor-pointer font-sans ml-8 hover:bg-red-500"
-              onClick={showSignUpModal}
+              className="header-signup-button bg-red-600 rounded-md text-white text-sm font-semibold px-4 cursor-pointer font-sans ml-8 hover:bg-red-500"
+              onClick={showModal}
             >
-              <div>Sign up</div>
+              Sign up
             </Button>
+
+            <Modal
+              title={<CustomModalTitle />}
+              open={isModalVisible} // Changed `open` to `visible`
+              onCancel={handleCancel}
+              width={400}
+              footer={null}
+            >
+              <div className="flex justify-center">
+                <Button
+                  icon={<GithubOutlined />}
+                  size="large"
+                  onClick={handleGithubSignIn}
+                  className="flex items-center "
+                >
+                  Sign in with GitHub
+                </Button>
+              </div>
+            </Modal>
           </div>
         </div>
       </div>
-      <Modal
-        title="Sign In"
-        visible={signInOpen}
-        onOk={handleSignInOk}
-        confirmLoading={confirmLoading}
-        onCancel={handleCancel}
-        okButtonProps={{
-          style: { background: "#ff0000" },
-        }}
-        ref={signInModalRef}
-        footer={null}
-        closable={!confirmLoading}
-        maskClosable={!confirmLoading}
-        className="disable-hover"
-      >
-        <div>
-          <Input
-            placeholder="Email"
-            value={email}
-            onChange={(e) => handleInputChange(e, setEmail)}
-            className="mb-4"
-          />
-        </div>
-        <div>
-          <Input.Password
-            placeholder="Password"
-            value={password}
-            onChange={handlePasswordChange}
-            className="mb-4"
-          />
-        </div>
-        <div className="flex items-center">
-          {emptyFieldError && (
-            <div style={{ color: "red", marginRight: "8px" }}>
-              Please fill in all fields!
-            </div>
-          )}
-          <div style={{ marginLeft: "auto" }}>
-            <Button onClick={handleCancel} disabled={confirmLoading}>
-              Cancel
-            </Button>
-          </div>
-          <div style={{ marginLeft: "8px" }}>
-            <Button
-              className="header-signup-button bg-red-600 rounded-md text-white text-sm font-semibold relative cursor-pointer font-sans hover:bg-red-500"
-              onClick={handleSignInOk}
-              disabled={emptyFieldError || confirmLoading}
-              loading={confirmLoading}
-            >
-              Confirm
-            </Button>
-          </div>
-        </div>
-      </Modal>
-      <Modal
-        title="Please sign up:"
-        visible={signUpOpen}
-        onOk={handleSignUpOk}
-        confirmLoading={confirmLoading}
-        onCancel={handleCancel}
-        okText="Confirm"
-        okButtonProps={{
-          style: { background: "#ff0000" },
-          disabled: password !== confirmPassword, // Disable the button if passwords don't match
-        }}
-        ref={signUpModalRef}
-        footer={null}
-        closable={!confirmLoading} // Disable the close button during confirm process
-        maskClosable={!confirmLoading} // Disable clicking elsewhere to close the modal during confirm process
-        className="disable-hover"
-      >
-        <div>
-          <Input
-            placeholder="Name"
-            value={name}
-            onChange={(e) => handleInputChange(e, setName)}
-            className="mb-4"
-          />
-        </div>
-        <div>
-          <Input
-            placeholder="Email"
-            value={email}
-            onChange={(e) => handleInputChange(e, setEmail)}
-            className="mb-4"
-          />
-        </div>
-        <div>
-          <Input.Password
-            placeholder="Password"
-            value={password}
-            onChange={handlePasswordChange}
-            className="mb-4"
-          />
-        </div>
-        <div>
-          <Input.Password
-            placeholder="Confirm Password"
-            value={confirmPassword}
-            onChange={handleConfirmPasswordChange}
-            className="mb-4"
-          />
-        </div>
-        <div className="flex items-center">
-          {passwordMatchError && (
-            <div style={{ color: "red", marginRight: "8px" }}>
-              Password doesn&apos;t match!
-            </div>
-          )}
-          {emptyFieldError && (
-            <div style={{ color: "red", marginRight: "8px" }}>
-              Please fill in all fields!
-            </div>
-          )}
-          <div style={{ marginLeft: "auto" }}>
-            <Button onClick={handleCancel} disabled={confirmLoading}>
-              Cancel
-            </Button>
-          </div>
-          <div style={{ marginLeft: "8px" }}>
-            <Button
-              className="header-signup-button bg-red-600 rounded-md text-white text-sm font-semibold relative cursor-pointer font-sans hover:bg-red-500"
-              onClick={handleSignUpOk}
-              disabled={
-                password !== confirmPassword ||
-                emptyFieldError ||
-                confirmLoading
-              }
-              loading={confirmLoading}
-            >
-              Confirm
-            </Button>
-          </div>
-        </div>
-      </Modal>
     </>
   );
 }

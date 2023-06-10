@@ -14,11 +14,9 @@
   color: #ffffff !important;
 }
 
-/* Apply the custom style to the sign-up modal's confirm button */
-.header-signup-modal .ant-modal-footer .ant-btn-primary {
-  background-color: #ff0000 !important;
-}
-
-.disable-hover .ant-btn[disabled]:hover {
-  pointer-events: none;
+.fixed-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000; /* To ensure the header is on top of other elements */
 }
