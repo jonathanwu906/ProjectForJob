@@ -5,7 +5,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - "4173:80"
+      - "4173:4173"
     depends_on:
       - backend
 
@@ -15,3 +15,13 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
+
+  nginx:
+    restart: always
+    build: ./nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+      - backend
+  
