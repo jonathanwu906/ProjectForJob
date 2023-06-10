@@ -5,7 +5,9 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - 4173:4173
+      - 4173:80
+    depends_on:
+      - backend
 
   backend:
     build:
@@ -13,13 +15,3 @@ services:
       dockerfile: Dockerfile
     ports:
       - 3000:3000
-
-  nginx:
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
-    ports:
-      - 80:80
-    depends_on:
-      - frontend
-      - backend

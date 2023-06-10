@@ -17,6 +17,5 @@ COPY . .
 # Build the application
 RUN npm run build
 
-FROM nginx:1.21-alpine
+FROM nginx
 COPY --from=build /frontend/dist /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
