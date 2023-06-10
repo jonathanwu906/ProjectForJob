@@ -15,7 +15,7 @@ function Header() {
 
   const handleGithubSignIn = async () => {
     window.location.href =
-      "https://github.com/login/oauth/authorize?client_id=67b1c88e47149ca869f3&redirect_uri=http://localhost:3000/api/redirect";
+      "https://github.com/login/oauth/authorize?client_id=67b1c88e47149ca869f3&redirect_uri=http://18.180.45.13:3000/api/redirect";
   };
 
   const showModal = () => {
@@ -30,7 +30,7 @@ function Header() {
     <>
       <div className="fixed-header flex justify-between py-2.5 px-8 bg-white">
         <div className="font-sans items-center inline-flex flex-grow">
-          <a href="http://localhost:4173">
+          <a href="http://18.180.45.13:4173">
             <img src={Logo} alt="ProjectForJob" />
           </a>
           <Input
@@ -41,7 +41,7 @@ function Header() {
           <div className="ml-8 items-center flex text-gray-600 text-base box-border">
             <div>
               <a
-                href="http://localhost:4173"
+                href="http://18.180.45.13:4173"
                 className="font-normal cursor-pointer hover:text-red-500"
               >
                 Projects
@@ -49,7 +49,7 @@ function Header() {
             </div>
             <div>
               <a
-                href="http://localhost:4173/jobs"
+                href="http://18.180.45.13:4173/jobs"
                 className="font-normal ml-8 cursor-pointer hover:text-red-500"
               >
                 Jobs

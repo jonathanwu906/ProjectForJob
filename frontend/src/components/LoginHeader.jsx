@@ -34,7 +34,7 @@ function LoginHeader() {
 
   const logout = () => {
     axios
-      .post("http://localhost:3000/api/logout", {}, { withCredentials: true })
+      .post("http://18.180.45.13:3000/api/logout", {}, { withCredentials: true })
       .then(() => {
         window.location.assign("/");
       })
@@ -53,7 +53,7 @@ function LoginHeader() {
     <>
       <div className="fixed-header flex justify-between py-2.5 px-8 bg-white">
         <div className="font-sans items-center inline-flex flex-grow">
-          <a href="http://localhost:4173">
+          <a href="http://18.180.45.13:4173">
             <img src={Logo} alt="ProjectForJob" />
           </a>
           <Input
@@ -64,7 +64,7 @@ function LoginHeader() {
           <div className="ml-8 items-center flex text-gray-600 text-base box-border">
             <div>
               <a
-                href="http://localhost:1"
+                href="http://18.180.45.13:1"
                 className="font-normal cursor-pointer hover:text-red-500"
               >
                 Projects
@@ -72,7 +72,7 @@ function LoginHeader() {
             </div>
             <div>
               <a
-                href="http://localhost:4173/jobs"
+                href="http://18.180.45.13:4173/jobs"
                 className="font-normal ml-8 cursor-pointer hover:text-red-500"
               >
                 Jobs
@@ -89,7 +89,7 @@ function LoginHeader() {
         <div className="items-center flex box-border font-sans">
           <div>
             <a
-              href="http://localhost:4173/posts/new/submission"
+              href="http://18.180.45.13:4173/posts/new/submission"
               className="font-normal text-base line-height-24 text-gray-600 block ml-8 cursor-pointer hover:text-red-500"
             >
               Submit a project

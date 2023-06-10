@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const jobs = await axios
-  .get("http://localhost:3000/api/allJobs")
+  .get("http://18.180.45.13:3000/api/allJobs")
   .then((response) => {
     return response.data;
   })

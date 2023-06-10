@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const projects = await axios
-  .get("http://localhost:3000/api/projects")
+  .get("http://18.180.45.13:3000/api/projects")
   .then((response) => {
     return response.data;
   })

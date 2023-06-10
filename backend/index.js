@@ -21,7 +21,7 @@ dotenv.config({ path: path.join(__dirname, "./.env") });
 // Middleware
 app.use(
   cors({
-    origin: "http://localhost:4173",
+    origin: "http://18.180.45.13:4173",
     credentials: true,
   })
 );
@@ -149,7 +149,7 @@ app.get("/api/redirect", async (req, res) => {
   res.cookie("userName", userName);
   // res.cookie("languages", result);
 
-  res.redirect("http://localhost:4173");
+  res.redirect("http://18.180.45.13:4173");
 
   const calculateLanguageCounts = async (userName) => {
     const repos = await octokit.request("GET /users/{owner}/repos", {
@@ -220,9 +220,9 @@ app.get("/api/projects", async (req, res) => {
 
 app.post("/api/logout", async (req, res) => {
   // Clear the JWT token cookie
-  res.clearCookie("jwt", { domain: "localhost", path: "/" });
-  res.clearCookie("userName", { domain: "localhost", path: "/" });
-  res.clearCookie("languages", { domain: "localhost", path: "/" });
+  res.clearCookie("jwt", { domain: "18.180.45.13", path: "/" });
+  res.clearCookie("userName", { domain: "18.180.45.13", path: "/" });
+  res.clearCookie("languages", { domain: "18.180.45.13", path: "/" });
 
   // Send a response indicating successful logout
   return res.send({ message: "Logout successful" });
