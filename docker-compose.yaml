@@ -14,7 +14,7 @@ services:
     ports:
       - 3000:3000
 
-  nginx-proxy:
+  nginx:
     build:
       context: ./nginx
       dockerfile: Dockerfile
