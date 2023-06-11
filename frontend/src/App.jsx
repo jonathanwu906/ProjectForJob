@@ -23,7 +23,7 @@ function App() {
         path="/"
         element={isAuthenticated ? <LoginPage /> : <HomePage />}
       />
-      <Route path="healthcheck" element={<HealthCheckPage />} />
+      <Route path="/healthcheck" element={<HealthCheckPage />} />
       <Route
         path="/jobs"
         element={isAuthenticated ? <LoginJobsPage /> : <Jobs />}
