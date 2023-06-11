@@ -149,7 +149,7 @@ app.get("/api/redirect", async (req, res) => {
   res.cookie("userName", userName);
   // res.cookie("languages", result);
 
-  res.redirect("http://18.180.45.13:4173");
+  res.redirect("http://18.180.45.13");
 
   const calculateLanguageCounts = async (userName) => {
     const repos = await octokit.request("GET /users/{owner}/repos", {

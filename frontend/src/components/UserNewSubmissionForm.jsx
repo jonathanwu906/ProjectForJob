@@ -105,7 +105,7 @@ const UserNewSubmissionForm = () => {
             <button
               type="submit"
               className="bg-red-500 hover:bg-red-600 text-white px-4 py-3 mt-2 ml-2 rounded cursor-pointer float-right"
-              onClick={() => window.location.assign("http://18.180.45.13:4173")}
+              onClick={() => window.location.assign("http://18.180.45.13")}
             >
               Submit
             </button>
