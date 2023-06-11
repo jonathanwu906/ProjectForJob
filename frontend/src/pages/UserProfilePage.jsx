@@ -7,7 +7,7 @@ import "../styles/UserProfilePage.css";
 const { Title, Paragraph } = Typography;
 
 const jobs = await axios
-  .get("http://18.180.45.13:3000/api/userjobs") // Replace this with your actual API endpoint
+  .get("http://18.180.45.13/api/userjobs") // Replace this with your actual API endpoint
   .then((response) => {
     return response.data;
   })

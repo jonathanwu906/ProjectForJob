@@ -220,9 +220,9 @@ app.get("/api/projects", async (req, res) => {
 
 app.post("/api/logout", async (req, res) => {
   // Clear the JWT token cookie
-  res.clearCookie("jwt", { domain: "18.180.45.13", path: "/" });
-  res.clearCookie("userName", { domain: "18.180.45.13", path: "/" });
-  res.clearCookie("languages", { domain: "18.180.45.13", path: "/" });
+  res.clearCookie("jwt", { domain: "localhost", path: "/" });
+  res.clearCookie("userName", { domain: "localhost", path: "/" });
+  res.clearCookie("languages", { domain: "localhost", path: "/" });
 
   // Send a response indicating successful logout
   return res.send({ message: "Logout successful" });

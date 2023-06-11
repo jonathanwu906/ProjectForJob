@@ -21,7 +21,7 @@ function ImageUploadPage() {
 
     try {
       const response = await axios.post(
-        "http://18.180.45.13:3000/api/posts",
+        "http://18.180.45.13/api/posts",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },

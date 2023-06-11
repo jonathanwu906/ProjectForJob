@@ -16,7 +16,7 @@ const UserNewSubmissionForm = () => {
     Object.entries(formData).forEach(([key, value]) => {
       data.append(key, value);
     });
-    await axios.post("http://18.180.45.13:3000/api/posts", data)
+    await axios.post("http://18.180.45.13/api/posts", data)
 
   };
 
