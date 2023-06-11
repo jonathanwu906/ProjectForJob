@@ -21,7 +21,7 @@ dotenv.config({ path: path.join(__dirname, "./.env") });
 // Middleware
 app.use(
   cors({
-    origin: "http://18.180.45.13:4173",
+    origin: "http://18.180.45.13",
     credentials: true,
   })
 );
